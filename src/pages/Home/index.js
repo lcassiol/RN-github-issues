@@ -17,23 +17,24 @@ TabIcon.propTypes = {
 export default class Home extends Component {
   state = {};
 
+  static navigationOptions = {
+    title: 'GitIssues',
+  };
+
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func,
     }).isRequired,
   };
 
-  newRepository() {
-    console.tron.log('navigate to repositories');
-  }
-
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
-        <Header title="GitIssues" />
         <View style={styles.form}>
           <View style={styles.inputContainer}>
-            <TouchableOpacity onPress={this.newRepository}>
+            <TouchableOpacity onPress={() => navigate('SearchRepositories', {})}>
               <View style={styles.newRepository}>
                 <Text style={styles.btnTitle}>Add new repository</Text>
                 <Icon name="plus" size={20} style={styles.formIcon} />

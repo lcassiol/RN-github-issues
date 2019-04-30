@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
-// import { Container } from './styles';
+import styles from './styles';
 
-const SearchRepositories = () => <View />;
+export default class SearchRepositories extends Component {
+  state = {};
 
-export default SearchRepositories;
+  static navigationOptions = {
+    title: 'Search Repositories',
+  };
+
+  render() {
+    const { navigate } = this.props.navigation;
+
+    return (
+      <View style={styles.container}>
+        <Text>Search Repositories page</Text>
+      </View>
+    );
+  }
+}
