@@ -8,8 +8,13 @@
     "react-devtool": "react-devtools"
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "16.8.3",
-    "react-native": "0.59.5"
+    "react-native": "0.59.5",
+    "react-native-gesture-handler": "^1.1.0",
+    "react-native-status-bar-height": "^2.3.1",
+    "react-native-vector-icons": "^6.4.2",
+    "react-navigation": "^3.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -27,7 +32,8 @@
     "jest": "^24.7.1",
     "metro-react-native-babel-preset": "^0.53.1",
     "react-devtools": "^3.6.1",
-    "react-test-renderer": "16.8.3"
+    "react-test-renderer": "16.8.3",
+    "reactotron-react-native": "^3.2.1"
   },
   "jest": {
     "preset": "react-native"
