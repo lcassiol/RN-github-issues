@@ -1,25 +1,10 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import React from 'react';
+
 import '~/config/ReactotronConfig';
 import '~/config/DevToolsConfig';
 
-export default class App extends Component {
-  state = {};
+import Routes from './routes';
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Welcome to React Native!</Text>
-      </View>
-    );
-  }
-}
+const App = () => <Routes />;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
+export default App;
