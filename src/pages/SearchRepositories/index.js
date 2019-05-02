@@ -54,7 +54,7 @@ export default class SearchRepositories extends Component {
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              placeholder="Repository name"
+              placeholder="Put the username"
               style={styles.formInput}
               placeholderTextColor={styles.placeholderColor.color}
               value={repositoryInput}
