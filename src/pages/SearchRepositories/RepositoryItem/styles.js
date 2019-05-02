@@ -8,26 +8,43 @@ const styles = StyleSheet.create({
     padding: metrics.basePadding,
     marginHorizontal: metrics.baseMargin * 2,
     marginTop: metrics.baseMargin,
+
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+
+  coluna: {
+    flex: 1,
+    flexDirection: 'column',
   },
 
   title: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
+    color: colors.darker,
+    borderRadius: 25,
   },
 
   infoContainer: {
     flexDirection: 'row',
     marginTop: metrics.baseMargin,
+
+    flex: 1,
   },
 
   info: {
     flexDirection: 'row',
     marginRight: metrics.baseMargin,
     alignItems: 'center',
+
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 3,
   },
 
   infoIcon: {
     color: colors.dark,
+    marginLeft: metrics.baseMargin,
   },
 
   infoText: {
