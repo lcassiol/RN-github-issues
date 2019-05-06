@@ -32,7 +32,6 @@ export default class SearchRepositories extends Component {
       const { data } = await api.get(`users/${repositoryInput}/repos`);
       this.setState({ repositories: data, loadingList: false });
     } catch (err) {
-      console.tron.log('error nao achei o usuario');
       this.setState({ loadingList: false, error: true });
     }
   };
