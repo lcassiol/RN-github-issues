@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
   error: {
     color: colors.danger,
-    fontSize: 12,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: metrics.basePadding,
     textAlign: 'center',
@@ -26,6 +26,16 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.light,
     borderBottomWidth: 1,
     padding: metrics.basePadding,
+  },
+
+  formTouch: {
+    paddingLeft: metrics.basePadding,
+    paddingRight: metrics.basePadding,
+    paddingTop: metrics.basePadding / 2,
+    paddingBottom: metrics.basePadding / 2,
+    marginLeft: 2,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
   },
 
   formIcon: {
@@ -38,7 +48,6 @@ const styles = StyleSheet.create({
     color: colors.darker,
     flex: 1,
     fontSize: 14,
-    marginRight: metrics.baseMargin,
     padding: metrics.basePadding / 2,
   },
 

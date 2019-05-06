@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TextInput, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
+import { View, TextInput, TouchableOpacity, ActivityIndicator, FlatList, Text } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -15,6 +15,7 @@ export default class SearchRepositories extends Component {
     repositoryInput: '',
     loadingList: false,
     repositories: [],
+    error: false,
   };
 
   static navigationOptions = {
@@ -24,24 +25,16 @@ export default class SearchRepositories extends Component {
   renderListItem = ({ item }) => <RepositoryItem repository={item} />;
 
   searchRepositories = async () => {
-    const { repositoryInput, repositories } = this.state;
-    const { data } = await api.get(`users/${repositoryInput}/repos`);
+    this.setState({ repositories: [], loadingList: true, error: false });
 
-    console.tron.log(data);
-    this.setState({ repositories: data, loading: false });
-
-    return !repositories.length ? (
-      <Text style={styles.empty}>Nenhum repositório adicionado</Text>
-    ) : (
-      <FlatList
-        data={repositories}
-        keyExtractor={item => String(item.id)}
-        renderItem={this.renderListItem}
-        onRefresh={this.loadRepositories}
-        refreshing={refreshing}
-        style={styles.listContainer}
-      />
-    );
+    try {
+      const { repositoryInput } = this.state;
+      const { data } = await api.get(`users/${repositoryInput}/repos`);
+      this.setState({ repositories: data, loadingList: false });
+    } catch (err) {
+      console.tron.log('error nao achei o usuario');
+      this.setState({ loadingList: false, error: true });
+    }
   };
 
   render() {
@@ -60,14 +53,15 @@ export default class SearchRepositories extends Component {
               value={repositoryInput}
               onChangeText={text => this.setState({ repositoryInput: text })}
             />
-            <TouchableOpacity onPress={this.searchRepositories}>
-              <Icon name="search" size={20} style={styles.formIcon} />
+            <TouchableOpacity onPress={this.searchRepositories} style={styles.formTouch}>
+              <Icon name="search" size={26} style={styles.formIcon} />
             </TouchableOpacity>
           </View>
-          {!!error && <Text style={styles.error}>{error}</Text>}
         </View>
         {loadingList ? (
           <ActivityIndicator size="large" style={styles.loading} />
+        ) : error ? (
+          <Text style={styles.error}>Nenhum usuário encontrado</Text>
         ) : (
           <FlatList
             data={repositories}

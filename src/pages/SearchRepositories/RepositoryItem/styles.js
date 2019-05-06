@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: metrics.baseRadius,
     padding: metrics.basePadding,
-    marginHorizontal: metrics.baseMargin * 2,
     marginTop: metrics.baseMargin,
 
     alignItems: 'center',
