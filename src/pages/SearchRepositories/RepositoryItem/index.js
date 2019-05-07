@@ -27,7 +27,7 @@ export default class RepositoryItem extends Component {
   }
 
   addRepositorie = async repository => {
-    const { full_name: repositoryName } = repository;
+    const { full_name, id, name, owner } = repository;
 
     if (await this.hasRepositorie(repository)) return;
 
@@ -39,10 +39,12 @@ export default class RepositoryItem extends Component {
       repositories = [];
     }
 
-    repositories.push(repositoryName);
+    repositories.push({ id, full_name, name, owner_avatar_url: owner.avatar_url });
     await AsyncStorage.setItem('@RNGithubIssues:repositories', JSON.stringify(repositories));
 
     this.setState({ showAdd: false });
+
+    repositories = await AsyncStorage.getItem('@RNGithubIssues:repositories');
   };
 
   hasRepositorie = async repository => {
@@ -50,9 +52,7 @@ export default class RepositoryItem extends Component {
 
     if (repositories === null) return false;
 
-    const repositorio = JSON.parse(repositories).filter(e => e === repository.full_name);
-
-    if (repositorio.length > 0) console.tron.log(repositorio);
+    const repositorio = JSON.parse(repositories).filter(e => e.full_name === repository.full_name);
 
     return repositorio.length > 0;
   };
@@ -82,7 +82,11 @@ export default class RepositoryItem extends Component {
           </View>
         </View>
 
-        {showAdd ? <Icon name="plus" style={styles.icon} size={30} /> : <View />}
+        {showAdd ? (
+          <Icon name="plus" style={styles.icon} size={30} />
+        ) : (
+          <Icon name="check" style={styles.icon} size={30} />
+        )}
       </TouchableOpacity>
     );
   }

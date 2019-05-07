@@ -12,7 +12,7 @@ import styles from './styles';
 
 export default class SearchRepositories extends Component {
   state = {
-    repositoryInput: '',
+    userInput: '',
     loadingList: false,
     repositories: [],
     error: false,
@@ -28,8 +28,8 @@ export default class SearchRepositories extends Component {
     this.setState({ repositories: [], loadingList: true, error: false });
 
     try {
-      const { repositoryInput } = this.state;
-      const { data } = await api.get(`users/${repositoryInput}/repos`);
+      const { userInput } = this.state;
+      const { data } = await api.get(`users/${userInput}/repos`);
       this.setState({ repositories: data, loadingList: false });
     } catch (err) {
       this.setState({ loadingList: false, error: true });
@@ -37,7 +37,7 @@ export default class SearchRepositories extends Component {
   };
 
   render() {
-    const { repositoryInput, loadingList, error, repositories } = this.state;
+    const { userInput, loadingList, error, repositories } = this.state;
 
     return (
       <View style={styles.container}>
@@ -49,8 +49,8 @@ export default class SearchRepositories extends Component {
               placeholder="Put the username"
               style={styles.formInput}
               placeholderTextColor={styles.placeholderColor.color}
-              value={repositoryInput}
-              onChangeText={text => this.setState({ repositoryInput: text })}
+              value={userInput}
+              onChangeText={text => this.setState({ userInput: text })}
             />
             <TouchableOpacity onPress={this.searchRepositories} style={styles.formTouch}>
               <Icon name="search" size={26} style={styles.formIcon} />
