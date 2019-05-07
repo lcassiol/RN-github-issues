@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  AsyncStorage,
+  FlatList,
+} from 'react-native';
 
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Header from '~/components/Header';
+
+import HomeItem from './HomeItem';
 
 import styles from './styles';
 
@@ -15,7 +23,14 @@ TabIcon.propTypes = {
 };
 
 export default class Home extends Component {
-  state = {};
+  state = {
+    repositoryInput: '',
+    repositories: [],
+    loadingList: true,
+    loadingButton: false,
+    error: '',
+    refreshing: false,
+  };
 
   static navigationOptions = {
     title: 'GitIssues',
@@ -27,7 +42,38 @@ export default class Home extends Component {
     }).isRequired,
   };
 
+  async componentDidMount() {
+    await this.loadRepositories();
+  }
+
+  loadRepositories = async () => {
+    this.setState({ loadingList: true, refreshing: true });
+    const repositories = JSON.parse(await AsyncStorage.getItem('@RNGithubIssues:repositories'));
+
+    this.setState({ repositories: repositories || [], loadingList: false, refreshing: false });
+  };
+
+  renderListItem = ({ item }) => <HomeItem repository={item} />;
+
+  renderList = () => {
+    const { repositories, refreshing } = this.state;
+
+    return !repositories.length ? (
+      <Text style={styles.empty}>Nenhum repositório adicionado</Text>
+    ) : (
+      <FlatList
+        data={repositories}
+        keyExtractor={item => String(item.id)}
+        renderItem={this.renderListItem}
+        onRefresh={this.loadRepositories2}
+        refreshing={refreshing}
+        style={styles.listContainer}
+      />
+    );
+  };
+
   render() {
+    const { loadingList } = this.state;
     const { navigate } = this.props.navigation;
 
     return (
@@ -42,6 +88,11 @@ export default class Home extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        {loadingList ? (
+          <ActivityIndicator size="large" style={styles.loading} />
+        ) : (
+          this.renderList()
+        )}
       </View>
     );
   }

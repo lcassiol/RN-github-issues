@@ -34,6 +34,24 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: colors.primary,
   },
+
+  listContainer: {
+    padding: metrics.basePadding,
+  },
+
+  loading: {
+    marginTop: metrics.baseMargin * 2,
+  },
+
+  placeholderColor: {
+    color: colors.regular,
+  },
+
+  empty: {
+    color: colors.dark,
+    marginTop: metrics.baseMargin * 2,
+    textAlign: 'center',
+  },
 });
 
 export default styles;
