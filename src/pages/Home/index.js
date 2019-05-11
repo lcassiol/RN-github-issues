@@ -46,14 +46,18 @@ export default class Home extends Component {
     await this.loadRepositories();
   }
 
-  loadRepositories = async () => {
+  loadRepositories = () => {
     this.setState({ loadingList: true, refreshing: true });
-    const repositories = JSON.parse(await AsyncStorage.getItem('@RNGithubIssues:repositories'));
+    this.fillRepositories();
+  };
+
+  fillRepositories = async () => {
+    const repositories = JSON.parse(await AsyncStorage.getItem('@rngithubissues:repositories'));
 
     this.setState({ repositories: repositories || [], loadingList: false, refreshing: false });
   };
 
-  renderListItem = ({ item }) => <HomeItem repository={item} />;
+  renderListItem = ({ item }) => <HomeItem repository={item} parentFlatList={this} />;
 
   renderList = () => {
     const { repositories, refreshing } = this.state;

@@ -31,20 +31,18 @@ export default class RepositoryItem extends Component {
 
     if (await this.hasRepositorie(repository)) return;
 
-    let repositories = JSON.parse(await AsyncStorage.getItem('@RNGithubIssues:repositories'));
+    let repositories = JSON.parse(await AsyncStorage.getItem('@rngithubissues:repositories'));
 
     if (repositories == null) repositories = [];
 
     repositories.push({ id, full_name, name, owner });
-    await AsyncStorage.setItem('@RNGithubIssues:repositories', JSON.stringify(repositories));
+    await AsyncStorage.setItem('@rngithubissues:repositories', JSON.stringify(repositories));
 
     this.setState({ showAdd: false });
-
-    repositories = await AsyncStorage.getItem('@RNGithubIssues:repositories');
   };
 
   hasRepositorie = async repository => {
-    const repositories = await AsyncStorage.getItem('@RNGithubIssues:repositories');
+    const repositories = await AsyncStorage.getItem('@rngithubissues:repositories');
 
     if (repositories === null) return false;
 
