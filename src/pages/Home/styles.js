@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
-    padding: metrics.basePadding,
+    marginHorizontal: metrics.baseMargin,
   },
 
   loading: {

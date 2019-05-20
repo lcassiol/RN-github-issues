@@ -69,7 +69,7 @@ export default class Home extends Component {
         data={repositories}
         keyExtractor={item => String(item.id)}
         renderItem={this.renderListItem}
-        onRefresh={this.loadRepositories2}
+        onRefresh={this.loadRepositories}
         refreshing={refreshing}
         style={styles.listContainer}
       />
