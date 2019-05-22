@@ -1,5 +1,5 @@
 # RN-github-issues
-This project in React-Native it's for a challenge of Bootcamp Rocketseat OMNI Stack RN-module 2 to create a serveless project to consume Github API
+This project in React-Native was for the Bootcamp challenge of  Rocketseat OMNI Stack RN-module 2 to create a serverless project to consume Github API
 
 Home
 
